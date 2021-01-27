@@ -20,11 +20,29 @@
     </div>
 
     <div id="account-details">
+        <h1 class="text-center">Your account details</h1>
+        <div>
+            <p>add money</p>
+        </div>
+        <div>
+            <p>wihtdraw money</p>
+        </div>
+        <div>
+            <p>Account Balance</p>
+        </div>
 
     </div>
 
     <script>
-        
+        const loginBtn = document.getElementById("login-btn");
+        const loginContainer = document.getElementById("login-container");
+        const accountDetails = document.getElementById("account-details");
+        loginBtn.addEventListener("click",function(){
+            accountDetails.style.display = "block";
+            loginContainer.style.display = "none";
+            
+
+        });
 
     </script>
 </body>
