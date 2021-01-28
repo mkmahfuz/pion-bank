@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pioneer Bank</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>  
+    <div id="login-area" >
+        <h1 class="text-center">Welcome to Pioneer Bank</h1>
+        <div id="login-form" class="box-type-1">
+            <h4>LogIn</h4>
+            <input type="text" class="form-control" placeholder="email"><br>
+            <input type="password" class="form-control" name="" id="" placeholder="password"><br>
+            <button id="login-btn" class="btn btn-success" type="submit">Enter</button>
+        </div>
+    </div>
+
+    <div id="account-area">
+        <h1 class="text-center">Your account details</h1>
+        <section id="account-details-area" class="row">   
+            <div class="col-md-4">     
+            <div id="deposit-area" class="box-type-1">
+                <h5>Deposit</h5>
+                <h2>$<span id="deposit-amount">00</span></h2>
+            </div>
+            </div>
+            <div class="col-md-4"> 
+            <div id="withdraw-area" class="box-type-1">
+                <h5>Withdraw</h5>
+                <h2>$<span id="withdraw-amount">00</span></h2>
+            </div>
+            </div>
+            <div class="col-md-4"> 
+            <div id="balance-area" class="box-type-1">
+                <h5>Balance</h5>
+                <h2>$<span id="balance-amount">1210</span></h2>
+            </div>  
+            </div>      
+        </section>
+        
+        <section id="input-action-area" class="row">
+            <div class="col-md-6">
+            <div id="deposit-input" class="box-type-1">
+                <h4>Deposit</h4>
+                <input id="input-deposit" type="text" class="form-control" placeholder="amount to deposit"><br>
+                <button id="deposit-btn" type="submit" class="btn btn-success">Deposit</button>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <div id="withdraw-input" class="box-type-1">
+                <h4>Withdraw</h4>
+                <input id="input-withdraw" type="text" class="form-control" placeholder="amount to withdraw"><br>
+                <button id="withdraw-btn" type="submit" class="btn btn-success">Withdraw</button>
+            </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        //first part login area actions
+        const loginBtn = document.getElementById("login-btn");
+        const loginContainer = document.getElementById("login-area");
+        const accountDetails = document.getElementById("account-area");
+        loginBtn.addEventListener("click",function(){
+            accountDetails.style.display = "block";
+            loginContainer.style.display = "none";
+        });
+        //2nd part account details area
+        //get required element
+        const depositBtn = document.getElementById("deposit-btn");
+        const withdrawBtn = document.getElementById("withdraw-btn");
+        const depositAmount = document.getElementById("deposit-amount");
+        const withdrawAmount = document.getElementById("withdraw-amount");
+        const balanceAmount = document.getElementById("balance-amount");
+
+        //common function after refactoring will be here
+
+        //deposit calculation
+        depositBtn.addEventListener("click",function(){
+            const inputDeposit = document.getElementById("input-deposit");
+            
+            const inputDepositNumber = parseFloat(inputDeposit.value);
+            if(isNaN(inputDepositNumber)){inputDepositNumber = 0;};
+            const previousDeposit = depositAmount.innerText;
+            const previousDepositNumber = parseFloat(previousDeposit);
+            const totalDeposit = inputDepositNumber + previousDepositNumber;
+            depositAmount.innerText = totalDeposit;
+            const balanceAmountNumber = parseFloat(balanceAmount.innerText);
+            const totalBalance = inputDepositNumber + balanceAmountNumber;
+            balanceAmount.innerText = totalBalance;
+
+            inputDeposit.value = "";
+        });
+
+        //withdraw calculation
+        withdrawBtn.addEventListener("click",function(){
+            const inputWithdraw = document.getElementById("input-withdraw");
+
+            const inputWithdrawNumber = parseFloat(inputWithdraw.value);
+            if(isNaN(inputWithdrawNumber)){inputWithdrawNumber = 0;};
+            const previousWithdraw = withdrawAmount.innerText;
+            const previousWithdrawNumber = parseFloat(previousWithdraw);
+            const totalWithdraw = inputWithdrawNumber + previousWithdrawNumber;
+            withdrawAmount.innerText = totalWithdraw;
+            const balanceAmountNumber = parseFloat(balanceAmount.innerText);
+            const totalBalance = inputWithdrawNumber*(-1) + balanceAmountNumber;
+            balanceAmount.innerText = totalBalance;
+
+            inputWithdraw.value = "";
+        });
+        //total balance calculation
+
+
+
+    </script>
+</body>
+</html>
