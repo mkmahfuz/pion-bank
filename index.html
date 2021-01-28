@@ -62,6 +62,7 @@
     </div>
 
     <script>
+        //first part login area actions
         const loginBtn = document.getElementById("login-btn");
         const loginContainer = document.getElementById("login-area");
         const accountDetails = document.getElementById("account-area");
@@ -69,6 +70,7 @@
             accountDetails.style.display = "block";
             loginContainer.style.display = "none";
         });
+        //2nd part account details area
         //get required element
         const depositBtn = document.getElementById("deposit-btn");
         const withdrawBtn = document.getElementById("withdraw-btn");
@@ -81,17 +83,35 @@
         //deposit calculation
         depositBtn.addEventListener("click",function(){
             const inputDeposit = document.getElementById("input-deposit");
+            
             const inputDepositNumber = parseFloat(inputDeposit.value);
+            if(isNaN(inputDepositNumber)){inputDepositNumber = 0;};
             const previousDeposit = depositAmount.innerText;
             const previousDepositNumber = parseFloat(previousDeposit);
             const totalDeposit = inputDepositNumber + previousDepositNumber;
             depositAmount.innerText = totalDeposit;
+            const balanceAmountNumber = parseFloat(balanceAmount.innerText);
+            const totalBalance = inputDepositNumber + balanceAmountNumber;
+            balanceAmount.innerText = totalBalance;
+
             inputDeposit.value = "";
         });
 
         //withdraw calculation
         withdrawBtn.addEventListener("click",function(){
-            const inputWithdraw = document.getElementById("input-withdraw").value;
+            const inputWithdraw = document.getElementById("input-withdraw");
+
+            const inputWithdrawNumber = parseFloat(inputWithdraw.value);
+            if(isNaN(inputWithdrawNumber)){inputWithdrawNumber = 0;};
+            const previousWithdraw = withdrawAmount.innerText;
+            const previousWithdrawNumber = parseFloat(previousWithdraw);
+            const totalWithdraw = inputWithdrawNumber + previousWithdrawNumber;
+            withdrawAmount.innerText = totalWithdraw;
+            const balanceAmountNumber = parseFloat(balanceAmount.innerText);
+            const totalBalance = inputWithdrawNumber*(-1) + balanceAmountNumber;
+            balanceAmount.innerText = totalBalance;
+
+            inputWithdraw.value = "";
         });
         //total balance calculation
 
